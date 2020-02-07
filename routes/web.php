@@ -19,8 +19,9 @@ Route::get('/info', function () {
     phpinfo();
 });
 
-Route::any('/reg','TestController@reg');
-Route::any('/login','TestController@login');
-Route::any('/time','TestController@showTime');//获取数据
-Route::any('/check','TestController@check');
-Route::any('/auth','TestController@auth');
+Route::post('/reg','TestController@reg');
+Route::post('/login','TestController@login');
+Route::get('/time','TestController@showTime');//获取数据
+Route::get('/check','TestController@check');//get签名
+Route::post('/check2','TestController@check2');//post签名
+Route::post('/auth','TestController@auth');//鉴权

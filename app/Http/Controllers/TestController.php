@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\UserModel;
 use Illuminate\Support\Facades\Redis;
 class TestController extends Controller{
-    function reg(Request $request){
+    public function reg(Request $request){
         //echo '<pre>';print_r($_POST);echo '</pre>';
         $pass1=request()->input('pass1');
         $pass2=request()->input('pass2');
@@ -57,7 +57,7 @@ class TestController extends Controller{
         die(json_encode($response));
     }
 
-    function login(Request $request){
+    public function login(Request $request){
         $value=request()->input('user_name');
         $user_pwd=request()->input('user_pwd');
         //按name找记录
@@ -114,7 +114,7 @@ class TestController extends Controller{
     return substr($token,5,20);
 }
     //获取用户信息接口
-    function showTime(){
+    public function showTime(){
         if(empty($_SERVER['HTTP_TOKEN'])||empty($_SERVER['HTTP_UID'])){
             $response=[
                 'error'=>40003,
@@ -177,7 +177,7 @@ class TestController extends Controller{
 
 //    签名
     public function check(){
-        echo "接收端>>>>>";echo "</br>";
+        echo "接收端";echo "</br>";
         echo '<pre>';print_r($_GET);echo '</pre>';
 
         $key="1905";//计算签名的key 与发送端保持一致
@@ -200,5 +200,21 @@ class TestController extends Controller{
         echo "1111";
     }
 
+    public function check2(){
+        $key="1905";//计算签名的key 和发送端的保持一致
+        echo '<pre>';print_r($_POST);
+//        接收数据  和  签名
+        $json_data=$_POST['data'];
+        $sign=$_POST['sign'];
+//      计算签名
+        $sign2=md5($json_data.$key);
+        echo "接收端计算的签名".$sign2;echo'<br>';
+//        比较接收到的签名
+        if($sign2==$sign){
+            echo "签名成功";
+        }else{
+            echo "签名失败";
+        }
+    }
 }
  
