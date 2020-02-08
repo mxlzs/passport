@@ -216,5 +216,9 @@ class TestController extends Controller{
             echo "签名失败";
         }
     }
+
+    public function decrypt(){
+
+    }
 }
  
