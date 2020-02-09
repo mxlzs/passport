@@ -221,18 +221,7 @@ class TestController extends Controller{
 
     }
 
-    public function decrypt2(){
-        $data=base64_decode($_GET['data']);
-        echo "接收到的数据密文：".$data;
-        $method="AES-256-CBC";
-        $key="djy";
-        $iv="qwertsdffffghasd";
-        //解密
-        $dec_data = openssl_decrypt($data, $method, $key,OPENSSL_RAW_DATA,$iv);
-        echo '解密数据:'.$dec_data;
-        $arr=json_decode($dec_data,true);
-        echo print_r($arr);
-    }
+    
 
 }
  
