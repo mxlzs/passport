@@ -218,10 +218,26 @@ class TestController extends Controller{
     }
 
     public function decrypt(){
-
+        $data=base64_decode($_GET["data"]);
+        echo "接收到的数据密文：".$data;echo "</br>";
+        $path=storage_path("keys/pub_key2");
+        $pub_key =openssl_pkey_get_public ("file://".$path);
+        openssl_public_decrypt  ($data,$decrypted,$pub_key,OPENSSL_PKCS1_PADDING);
+        echo '解密数据:'.$decrypted;
     }
 
-    
-
+    public function decrypt2(){
+//        echo print_r($_GET);die;
+        $data=base64_decode($_GET["data"]);
+        echo "接收到的数据密文：".$data;echo "</br>";
+        $method="AES-256-CBC";
+        $key="djy";
+        $iv="qwertsdffffghasd";
+        //解密
+        $dec_data = openssl_decrypt($data, $method, $key,OPENSSL_RAW_DATA,$iv);
+        echo '解密数据:'.$dec_data;echo "</br>";
+        $arr=json_decode($dec_data,true);
+        echo print_r($arr);
+    }
 }
  
