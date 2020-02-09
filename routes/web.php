@@ -25,4 +25,5 @@ Route::get('/time','TestController@showTime');//获取数据
 Route::get('/check','TestController@check');//get签名
 Route::post('/check2','TestController@check2');//post签名
 Route::post('/auth','TestController@auth');//鉴权
-Route::post('/decrypt2','TestController@decrypt2');//非对称加密
+Route::get('/decrypt2','TestController@decrypt2');//对称加密
+Route::any('/decrypt3','TestController@decrypt3');

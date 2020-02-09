@@ -220,5 +220,32 @@ class TestController extends Controller{
     public function decrypt(){
 
     }
+
+    public function decrypt2(){
+        $data=base64_decode($_GET['data']);
+        echo "接收到的数据密文：".$data;die;
+        $key="djy";
+        $method="AES-256-CBC";
+        $iv="qwertsdffffghasd";
+        //解密
+        $dec_data = openssl_decrypt($data, $method, $key,OPENSSL_RAW_DATA,$iv);
+        echo '解密数据:'.$dec_data;
+        $arr=json_decode($dec_data,true);
+        echo print_r($arr);
+    }
+//    public function decrypt3(){
+//        $data=base64_decode($_GET['data']); //接收加密的数据
+//        echo '<hr>';
+//        echo "接收到的数据密文: ".$data;
+//        $method ='AES-256-CBC';
+//        $key='1905api';
+//        $iv='asdfghjklpoiuytr';
+//        //解密
+//        $dec_data = openssl_decrypt($data, $method, $key,OPENSSL_RAW_DATA,$iv);
+//        echo '解密数据:'.$dec_data;
+//
+//        $arr=json_decode($dec_data,true);
+//        echo '<pre>';print_r($arr);echo '</pre>';
+//    }
 }
  
